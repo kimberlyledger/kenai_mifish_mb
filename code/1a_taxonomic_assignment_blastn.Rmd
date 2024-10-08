@@ -370,7 +370,7 @@ salmon <- read.table("/home/kimberly.ledger/kenai_mifish_mb/kenai_20231027/post/
   select(-V5, -V6, -V7, -V8, -V9, -V10, -V11, -V12, -V13, -V14) %>%  #remove unnecessary columns
   group_by(V1, V2) %>% # group by the sequence key and the full taxonomy to reduce duplicate entries
   unique() %>% # doing that reduced the number of entries
-  rename(qseqid=V1, species=V2, perc_id=V3, length=V4) %>% #rename headers
+  rename(qseqid=V1, species=V2, perc_id=V3, length=V4) #rename headers
 ```
 
 ## rank the hits by % identity
@@ -389,7 +389,8 @@ salmon_seq_id_diff <- salmon %>%
       mutate(diff = top_perc - seq_percID) %>% # calculate the difference between the % identity of the top hit and each subsequent taxonomic hit
       arrange(diff)
 
-salmon_seq_id_diff
+salmon_seq_id_diff #%>%
+   #filter(species == "Oncorhynchus_keta")
 ```
 
 since there are very few basepair difference among species, let's go with species within 0.5% of the top match 
